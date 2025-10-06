@@ -73,7 +73,31 @@ const Page = () => {
 
   const handleUpdate = async (id) => {
     try {
-      await axios.post(`${process.env.NEXT_PUBLIC_SERVERURL}/api/v1/faculty/edit/${id}`, editData, { withCredentials: true });
+      let imageUrl = editData.imageUrl;
+
+      // Check if a new file was selected (File object instead of string URL)
+      if (editData.imageUrl instanceof File) {
+        const imageData = new FormData();
+        const folder = process.env.NEXT_PUBLIC_CLOUD_FOLDER;
+        const cloud_name = process.env.NEXT_PUBLIC_CLOUDNAME;
+        const upload_preset = process.env.NEXT_PUBLIC_UPLOAD_PRESET;
+
+        imageData.append("file", editData.imageUrl);
+        imageData.append('folder', folder);
+        imageData.append("cloud_name", cloud_name);
+        imageData.append("upload_preset", upload_preset);
+
+        const { data } = await axios.post(`https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`, imageData);
+        imageUrl = data?.url;
+      }
+
+      await axios.post(`${process.env.NEXT_PUBLIC_SERVERURL}/api/v1/faculty/edit/${id}`, {
+        name: editData.name,
+        mail: editData.mail,
+        qualification: editData.qualification,
+        imageUrl
+      }, { withCredentials: true });
+      
       Swal.fire('Updated!', 'Faculty has been updated.', 'success');
       setEditingId(null);
       fetchFaculty();
@@ -118,12 +142,7 @@ const Page = () => {
                           className="w-full p-2 border rounded"
                           placeholder="Qualification"
                         />
-                        <input
-                          type="file"
-                          onChange={(e) => setEditData({...editData, imageUrl: e.target.files[0]})}
-                          className="w-full p-2 border rounded"
-                          placeholder="Image"
-                        />
+                        <input type="file" onChange={(e) => setEditData({...editData, imageUrl: e.target.files[0]})} />
                         <div className="flex gap-2">
                           <button onClick={() => handleUpdate(faculty._id)} className="bg-green-600 text-white px-4 py-2 rounded">Save</button>
                           <button onClick={() => setEditingId(null)} className="bg-gray-600 text-white px-4 py-2 rounded">Cancel</button>
