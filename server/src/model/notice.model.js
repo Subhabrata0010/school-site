@@ -10,11 +10,7 @@ const noticeSchema = new mongoose.Schema(
         details: {
             type: String,
             required: true,
-        },
-        author: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Admin",
-        },
+        }
     },
     {
         timestamps: true,

@@ -25,31 +25,31 @@ function NavLinks() {
       path: "/events",
     },
     {
-      title: "Highlights",
-      path: "/highlights",
+      title: "Notices",
+      path: "/notices",
     },
     {
-      isDropdown: true,
-      title: "Academics",
-      links: [
-        {
-          title: "Departments",
-          path: "/academics/departments",
-        },
-        {
-          title: "Library",
-          path: "/academics/resources/library",
-        },
-        {
-          title: "moodle",
-          path: "/academics/resources/moodle",
-        },
-      ]
+      title: "Faculty",
+      path: "/faculty/facultylist",
     },
-    {
-      title: "Alumni",
-      path: "/alumni",
-    },
+    // {
+    //   isDropdown: true,
+    //   title: "Academics",
+    //   links: [
+    //     {
+    //       title: "Departments",
+    //       path: "/academics/departments",
+    //     },
+    //     {
+    //       title: "Library",
+    //       path: "/academics/resources/library",
+    //     },
+    //     {
+    //       title: "moodle",
+    //       path: "/academics/resources/moodle",
+    //     },
+    //   ]
+    // },
     // {
     //   title: "Administration",
     //   path: "/administration",

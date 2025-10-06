@@ -65,7 +65,7 @@ const adminLogin = async (req, res) => {
                 .json({ success: false, message: "insufficient data" });
         }
     
-        const findAdmin = await Admin.findOne({ email }).select("+password");
+        const findAdmin = await Admin.findOne({ email }).select("password");
     
         if (!findAdmin) {
             return res
@@ -120,7 +120,7 @@ const adminLogin = async (req, res) => {
     } catch (error) {
         return res
             .status(500)
-            .json({ success: false, message: "something went wrong" });
+            .json({ success: false, message: "something went wrong", error: error.message });
     }
 };
 

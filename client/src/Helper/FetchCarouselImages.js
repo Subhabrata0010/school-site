@@ -1,23 +1,26 @@
-const FetchCarouselImages = () => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            const response = await fetch('/data.json');
-            if (!response.ok) {
-                throw new Error('Failed to fetch data');
-            }
-            const data = await response.json();
-            resolve({
-                data: data.CarouselImages,
-                success: true
-            });
-        } catch (error) {
-            console.error('Error fetching data:', error);
-            reject({
-                message: error.message,
-                success: false
-            });
+import axios from "axios";
+
+const FetchCarouselImages = async () => {
+    try {
+        const { data } = await axios.get(`${process.env.NEXT_PUBLIC_SERVERURL}/api/v1/carousel/all`);
+        
+        if (data.success) {
+            // Map the response to match the expected format
+            const formattedImages = data.images.map(img => ({
+                ImageLink: img.imageURL,
+                _id: img._id
+            }));
+            
+            return {
+                success: true,
+                data: formattedImages
+            };
         }
-    })
-}
+        return { success: false, data: [] };
+    } catch (error) {
+        console.error("Error fetching carousel images:", error);
+        return { success: false, data: [] };
+    }
+};
 
 export default FetchCarouselImages;

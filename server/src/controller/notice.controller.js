@@ -15,8 +15,7 @@ const createNotice = async (req, res) => {
         }
         await Notice.create({
             title,
-            details,
-            author : req.admin
+            details
         });
         return res
             .status(200)
@@ -25,7 +24,7 @@ const createNotice = async (req, res) => {
         console.log(error)
         return res
             .status(500)
-            .json({ success: false, message: "something went wrong" });
+            .json({ success: false, message: "something went wrong", error: error.message });
     }
 };
 

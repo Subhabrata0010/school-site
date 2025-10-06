@@ -44,17 +44,34 @@ const Page = () => {
           </button>
         </div>
         <div className="mx-auto mt-5 p-5 w-[90%] min-h-[65vh] flex flex-wrap flex-row justify-center items-center border border-blue-500 rounded">
+          
+          {/* Event Management */}
           <Link className="md:w-1/2 w-full h-auto flex justify-center items-center" href={"createevent"}>
             <DashboardCard itemName="create event" />
           </Link>
-          {/* <Link className="md:w-1/2 w-full h-auto flex justify-center items-center" href={"editevent"}>
-            <DashboardCard itemName="edit event" />
-          </Link> */}
-          <Link className="md:w-1/2 w-full h-auto flex justify-center items-center" href={"#"}>
+          
+          {/* Faculty Management */}
+          <Link className="md:w-1/2 w-full h-auto flex justify-center items-center" href={"addfaculty"}>
+            <DashboardCard itemName="add faculty" />
+          </Link>
+          <Link className="md:w-1/2 w-full h-auto flex justify-center items-center" href={"managefaculty"}>
+            <DashboardCard itemName="manage faculty" />
+          </Link>
+          
+          {/* Notice Management */}
+          <Link className="md:w-1/2 w-full h-auto flex justify-center items-center" href={"addnotice"}>
             <DashboardCard itemName="create notice" />
           </Link>
-          <Link className="md:w-1/2 w-full h-auto flex justify-center items-center" href={"#"}>
-            <DashboardCard itemName="edit notice" />
+          <Link className="md:w-1/2 w-full h-auto flex justify-center items-center" href={"managenotice"}>
+            <DashboardCard itemName="manage notice" />
+          </Link>
+          
+          {/* Carousel Management */}
+          <Link className="md:w-1/2 w-full h-auto flex justify-center items-center" href={"addcarousel"}>
+            <DashboardCard itemName="add carousel" />
+          </Link>
+          <Link className="md:w-1/2 w-full h-auto flex justify-center items-center" href={"managecarousel"}>
+            <DashboardCard itemName="manage carousel" />
           </Link>
         </div>
       </div>
